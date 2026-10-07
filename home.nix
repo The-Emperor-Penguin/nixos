@@ -1,9 +1,14 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs [
+  home.packages = with pkgs; [
     chafa
-  ]
+  ];
+
+  programs.bash = {
+    enable = true;
+    initExtra = "chafa ~/.penguin_term.png";
+  };
 
   programs.vscode = {
     enable = true;
@@ -16,7 +21,10 @@
     };
   };
 
-  programs.alacritty.enable = true;
+  programs.kitty = {
+    enable = true;
+    enableGitIntegration = true;
+  };
 
   catppuccin = {
     enable = true;

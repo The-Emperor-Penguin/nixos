@@ -3,14 +3,10 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, pkgs, lib, ... }:
-let
-  home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-26.05.tar.gz;
-in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      "${home-manager}/nixos"
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -73,24 +69,6 @@ in
       keepassxc
     ];
   };
- 
-  home-manager.useGlobalPkgs = true; 
-  home-manager.backupFileExtension = "backup"; 
-
-  home-manager.users."josiah" = {
-    programs.vscode = {
-      enable = true;
-      profiles.default = {
-        extensions = with pkgs.vscode-extensions; [
-          ms-python.python
-        ];
-      };
-    };    
-
-    /* The home.stateVersion option does not have a default and must be set */
-    home.stateVersion = "26.05";
-    /* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
-  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -109,7 +87,7 @@ in
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-    alacritty
+    git
   ];
 
   fonts.packages = with pkgs; [

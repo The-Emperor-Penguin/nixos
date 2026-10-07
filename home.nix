@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  home.packages = with pkgs [
+    chafa
+  ]
+
   programs.vscode = {
     enable = true;
     profiles.default = {

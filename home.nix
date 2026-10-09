@@ -1,35 +1,57 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   home.packages = with pkgs; [
     chafa
   ];
 
-  programs.bash = {
-    enable = true;
-    initExtra = "chafa ~/.penguin_term.png";
-  };
+  programs = {
 
-  programs.vscode = {
-    enable = true;
-    profiles.default = {
-      extensions = with pkgs.vscode-extensions; [
-        ms-python.python
-        rust-lang.rust-analyzer
-        golang.go
-      ];
+    bash = {
+      enable = true;
+      initExtra = "chafa ~/.penguin_term.png";
+    };
+
+    vscode = {
+      enable = true;
+      profiles.default = {
+        enableUpdateCheck = false;
+        enableExtensionUpdateCheck = false;
+        extensions = lib.mkForce (with pkgs.vscode-extensions; [
+          catppuccin.catppuccin-vsc
+          catppuccin.catppuccin-vsc-icons
+          ms-python.python
+          rust-lang.rust-analyzer
+          golang.go
+          mkhl.direnv
+          bbenoist.nix
+        ]);
+        userSettings = {
+          "rust-analyzer.server.path" = "rust-analyzer";
+        };
+      };
+    };
+
+    direnv = {
+      enable = true;
+      enableBashIntegration = true;
+      nix-direnv.enable = true;
+    };
+
+    kitty = {
+      enable = true;
+      enableGitIntegration = true;
     };
   };
-
-  programs.kitty = {
-    enable = true;
-    enableGitIntegration = true;
-  };
-
   catppuccin = {
     enable = true;
     flavor = "mocha";
     accent = "sky";
+    vscode = {
+      profiles."default" = {
+        enable = true;
+      };
+    };
   };
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

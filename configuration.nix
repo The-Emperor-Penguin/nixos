@@ -81,22 +81,50 @@
   nixpkgs.config.allowUnfree = true;
 
   services.xserver.enable = true;
-  services.displayManager.plasma-login-manager.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    plasma-browser-integration
-    konsole
-    elisa
-  ];
+  programs.hyprland.enable = true;
+  programs.regreet = {
+    enable = true;
+    
+  };
+  services.greetd = {
+    settings = {
+      default_session = {
+        # Launch Hyprland with an inline configuration using the -c flag
+        command = "${pkgs.hyprland}/bin/Hyprland -c ${pkgs.writeText "greetd-hyprland-config.lua" ''
+          hl.config({
+            misc = {
+              disable_hyprland_logo = true,
+              disable_splash_rendering = true,
+              disable_hyprland_guiutils_check = true,
+              disable_watchdog_warning = true,
+            }
+          })
+
+          -- Wrap in bash to wait for regreet to close before triggering exit
+          hl.on("hyprland.start", function()
+            hl.exec_cmd("${pkgs.bash}/bin/bash -c '${pkgs.greetd.regreet}/bin/regreet; ${pkgs.hyprland}/bin/hyprctl dispatch exit'")
+          end)
+          ''}";
+        user = "greeter";
+      };
+    };
+  };
+  
 
   services.flatpak.enable = true;
+  xdg.portal = {
+    enable = true;
+    configPackages = [ pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+  };
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     git
-    catppuccin-kde
   ];
+
+  environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 
   fonts.packages = with pkgs; [
     font-awesome

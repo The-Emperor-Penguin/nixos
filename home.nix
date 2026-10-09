@@ -9,7 +9,10 @@
 
     bash = {
       enable = true;
-      initExtra = "chafa ~/.penguin_term.png";
+      initExtra = ''
+        chafa -s 20 ~/.penguin_term.png
+        cal
+        '';
     };
 
     vscode = {

@@ -122,6 +122,7 @@
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     git
+    playerctl
   ];
 
   environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];

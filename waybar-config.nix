@@ -2,25 +2,44 @@
 
     programs.waybar = {
       enable = true;
+      style = ''
+        * {
+          /* reference the color by using @color-name */
+          color: @text;
+          font-family: "Terminus (TTF)", "Terminus", monospace;
+        }
+        window#waybar {
+          /* you can also GTK3 CSS functions! */
+          background-color: shade(@base, 0.9);
+          border: 2px solid alpha(@crust, 0.3);
+        }
+
+        #workspaces,
+        #clock,
+        #pulseaudio,
+        #battery,
+        #network,
+        #cpu,
+        #memory,
+        #tray {
+          color: @sky;
+          border-radius: 10px;
+        }
+ 
+      '';
       settings = {
         mainBar = {
           "layer" = "top";
           "position" = "top";
-          "height" = 30;
-          "width" = 1280;
           "spacing" = 4;
           
           "modules-left" = [
-              "sway/workspaces"
-              "sway/mode"
-              "sway/scratchpad"
-              "custom/media"
+              "hyprland/workspaces"
           ];
           "modules-center" = [
-              "sway/window"
+              "hyprland/window"
           ];
           "modules-right" = [
-              "mpd"
               "pulseaudio"
               "network"
               "cpu"

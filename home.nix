@@ -20,7 +20,8 @@
        splash = false;
        wallpaper = [
          {
-           path = "/share/wallpapers/buttons.png";
+           monitor = "";
+           path = "/share/wallpapers/penguins.jpg";
          }
        ];
       };

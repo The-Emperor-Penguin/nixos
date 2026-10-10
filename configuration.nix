@@ -123,6 +123,7 @@
   environment.systemPackages = with pkgs; [
     git
     playerctl
+    hyprpaper
   ];
 
   environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
@@ -130,6 +131,7 @@
   fonts.packages = with pkgs; [
     font-awesome
     font-awesome_4
+    terminus_font_ttf
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

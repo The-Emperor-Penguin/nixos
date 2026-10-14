@@ -198,6 +198,30 @@
             (lib.generators.mkLuaInline "function()\n hl.exec_cmd(\"flatpak run com.github.zocker_160.SyncThingy\")\nend")
           ];
         }
+        {
+          _args = [
+            "hyprland.start"
+            (lib.generators.mkLuaInline "function()\n hl.exec_cmd(\"dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP PATH\")\nend")
+          ];
+        }
+        {
+          _args = [
+            "hyprland.start"
+            (lib.generators.mkLuaInline "function()\n hl.exec_cmd(\"systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP PATH\")\nend")
+          ];
+        }
+        {
+          _args = [
+            "hyprland.start"
+            (lib.generators.mkLuaInline "function()\n hl.exec_cmd(\"systemctl --user start hyprland-session.target\")\nend")
+          ];
+        }
+        {
+          _args = [
+            "hyprland.start"
+            (lib.generators.mkLuaInline "function()\n hl.exec_cmd(\"systemctl --user start xdg-desktop-portal-hyprland.service xdg-desktop-portal-gtk.service xdg-desktop-portal.service\")\nend")
+          ];
+        }
       ];
     };
   };    

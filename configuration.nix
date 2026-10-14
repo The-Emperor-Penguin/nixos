@@ -32,6 +32,8 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  security.rtkit.enable = true;
   
   fileSystems."/mnt/games" = {
     device = "/dev/disk/by-uuid/946991b9-31b9-45c2-8c9f-edb587802d13";
@@ -84,7 +86,24 @@
   programs.hyprland.enable = true;
   programs.regreet = {
     enable = true;
-    
+    settings = {
+      skip_selection = true;
+      background = {
+        path = "/share/wallpapers/penguins.jpg";
+        fit = "Cover";
+      };
+      GTK = {
+        application_prefer_dark_theme = true;
+      };
+      commands = {
+        reboot = [ "systemctl" "reboot" ];
+        poweroff = [ "systemctl" "poweroff" ];
+      };
+      widget.clock = {
+        format = "%A, %B %d, %Y - %I:%M %p";
+        resolution = "1s";
+      };
+    };    
   };
   services.greetd = {
     settings = {
@@ -112,11 +131,6 @@
   
 
   services.flatpak.enable = true;
-  xdg.portal = {
-    enable = true;
-    configPackages = [ pkgs.xdg-desktop-portal-hyprland ];
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
-  };
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).

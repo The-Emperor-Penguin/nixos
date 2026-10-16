@@ -9,6 +9,7 @@
 
   home.packages = with pkgs; [
     chafa
+    dbeaver-bin
   ];
 
   xdg.mimeApps = {

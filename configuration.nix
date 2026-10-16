@@ -137,7 +137,12 @@
   environment.systemPackages = with pkgs; [
     git
     playerctl
+    mpv
     hyprpaper
+    calibre
+    grim
+    wl-clipboard
+    slurp
   ];
 
   environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];

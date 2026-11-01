@@ -78,6 +78,10 @@
         '';
     };
 
+    vesktop = {
+      enable = true;
+    };
+
     vscode = {
       enable = true;
       profiles.default = {
@@ -94,6 +98,9 @@
         ]);
         userSettings = {
           "rust-analyzer.server.path" = "rust-analyzer";
+          "github.copilot.enable" = {
+            "*" = false;
+          };
         };
       };
     };

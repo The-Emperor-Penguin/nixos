@@ -75,6 +75,7 @@
       initExtra = ''
         chafa -s 20 ~/.penguin_term.png
         cal
+        alias screenshot_file='grim -g "$(slurp)" ~/Pictures/screenshot_$(date +%Y%m%d_%H%M%S).png'
         '';
     };
 

@@ -18,6 +18,11 @@
 
   zramSwap.enable = true;
 
+  services.harmonia.cache = {
+    enable = false;
+    signKeyPaths = [ "/var/lib/secrets/harmonia.secret" ];
+  };
+
   systemd.oomd = {
     enable = true;
     enableUserSlices = true;
@@ -82,8 +87,15 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  programs.nano.enable = false;
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
   services.xserver.enable = true;
   programs.hyprland.enable = true;
+
   programs.regreet = {
     enable = true;
     settings = {
@@ -167,6 +179,7 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
+  # to enable cache open port 5000
   networking.firewall.allowedTCPPorts = [ 22000 ];
   networking.firewall.allowedUDPPorts = [ 22000 ];
   # Or disable the firewall altogether.

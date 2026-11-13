@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, pkgs-unstable, ... }:
 
 {
 
@@ -85,6 +85,8 @@
 
     vscode = {
       enable = true;
+      package = pkgs-unstable.vscode;
+
       profiles.default = {
         enableUpdateCheck = false;
         enableExtensionUpdateCheck = false;
